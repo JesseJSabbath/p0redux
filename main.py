@@ -1,4 +1,4 @@
-'''this is the p0 rdux'''
+'''this is the p0 redux translating scala=>python'''
 
 import mysql.connector
 import time
