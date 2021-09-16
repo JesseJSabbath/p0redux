@@ -29,18 +29,21 @@ def delete_movie():
     delete_from_db()
 
 def delete_from_db():
-    #movie = get_title()
-    #cursor = database.cursor()
-    #cursor.execute("DELETE FROM movies WHERE title = %s", movie)
+    database = get_database()
+    cursor = database.cursor()
+    print("Enter the title of the movie you'd like to delete")
+    movie = input()
+    cursor.execute("DELETE FROM movies WHERE title LIKE binary %s", (movie,))
+    database.close()
 
     print("Movie Deleted!")
-    time.sleep(2)
 
-def update_movie(database):
+def update_movie():
     print("update_database")
 
-def stats_page(database):
+def stats_page():
     print("stats_page")
+    print
 
 def print_menu():
     print("\n\nScroll up to view contents or Choose an option below:\n")
@@ -50,7 +53,7 @@ def main_menu_choice(action):
     if action == "A" or action == "a":
         add_movie()
     elif action == 'D' or action == 'd':
-        delete_movie()
+        delete_from_db()
     elif action == "U" or action == "u":
         update_movie()
     elif action == "S" or action == "s":
@@ -81,13 +84,13 @@ choice = input()
 while choice != "x" and choice != "X":
 
     main_menu_choice(choice)
-    choice=input()
     mycursor = mydb.cursor()
     mycursor.execute('''SELECT * from movies''')
     result = mycursor.fetchall()
     for x in result:
         print(x)
     print_menu()
+    choice = input()
 
 
 
